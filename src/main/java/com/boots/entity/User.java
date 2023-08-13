@@ -4,8 +4,8 @@ package com.boots.entity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
@@ -30,6 +30,19 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(@Size(min = 2, message = "Не меньше 5ти знаков") String username
+            , @Size(min = 2, message = "Не меньше 5ти знаков") String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, @Size(min = 2, message = "Не меньше 5ти знаков") String username
+            , @Size(min = 2, message = "Не меньше 5ти знаков") String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {

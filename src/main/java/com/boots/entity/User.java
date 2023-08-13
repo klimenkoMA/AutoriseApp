@@ -32,6 +32,19 @@ public class User implements UserDetails {
     public User() {
     }
 
+    public User(@Size(min = 2, message = "Не меньше 5ти знаков") String username
+            , @Size(min = 2, message = "Не меньше 5ти знаков") String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, @Size(min = 2, message = "Не меньше 5ти знаков") String username
+            , @Size(min = 2, message = "Не меньше 5ти знаков") String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

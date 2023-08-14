@@ -34,12 +34,19 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUsername(username);
+        List<User> users = userRepository.findUsername(username);
 
-        if (user == null) {
+        for (User u: users
+             ) {
+            if (u.getUsername().equals(username)){
+                return u;
+            }
+        }
+
+        if (users.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
-        return user;
+        return null;
     }
 
     public User findUserById(Long userId) {
@@ -52,9 +59,9 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean saveUser(User user){
-        User userFromDB = userRepository.findUsername(user.getUsername());
+        List<User> usersFromDB = userRepository.findUsername(user.getUsername());
 
-        if(userFromDB != null){
+        if(!usersFromDB.isEmpty()){
             return false;
         }
 

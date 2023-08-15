@@ -26,15 +26,15 @@ public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
+//    @Autowired
+//    RoleRepository roleRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<User> users = userRepository.findUsername(username);
+        List<User> users = userRepository.findAllBy();
 
         for (User u: users
              ) {
@@ -55,11 +55,11 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> allUsers(){
-        return userRepository.findAll();
+        return userRepository.findAllBy();
     }
 
     public boolean saveUser(User user){
-        List<User> usersFromDB = userRepository.findUsername(user.getUsername());
+        List<User> usersFromDB = userRepository.findByUsername(user.getUsername());
 
         if(!usersFromDB.isEmpty()){
             return false;

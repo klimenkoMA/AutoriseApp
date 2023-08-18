@@ -19,7 +19,7 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String registration(Model model){
         model.addAttribute("userForm", new User());
-        return "registration";
+        return "/registration";
     }
 
     @PostMapping("/registration")
@@ -28,15 +28,15 @@ public class RegistrationController {
                           Model model){
 
         if (bindingResult.hasErrors()){
-            return "registration";
+            return "/registration";
         }
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
-            return "registration";
+            return "/registration";
         }
         if (!userService.saveUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-        return "registration";
+        return "/registration";
         }
-        return "redirect:/";
+        return "/registration";
     }
 }

@@ -18,7 +18,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String userList(Model model){
         model.addAttribute("allUsers", userService.allUsers());
-        return "admin";
+        return "/admin";
     }
 
     @PostMapping("/admin")
@@ -35,6 +35,6 @@ public class AdminController {
     public String gtUser(@PathVariable("userId") Long userId,
                          Model model){
         model.addAttribute("allUsers", userService.usergList(userId));
-        return "admin";
+        return "/admin";
     }
 }
